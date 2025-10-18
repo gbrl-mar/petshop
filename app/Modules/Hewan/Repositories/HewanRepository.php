@@ -13,7 +13,7 @@ class HewanRepository
 
     public function findById(int $id): ?Hewan
     {
-        return Hewan::find($id);
+        return Hewan::with('customer')->findOrFail($id);
     }
 
     public function create(array $data): Hewan

@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Hewan\Dto;
-use App\Modules\Hewan\Reqeuests\StoreHewanRequest;
+use App\Modules\Hewan\Requests\StoreHewanRequest;
 use Carbon\carbon;
 class CreateHewanDto
 {
@@ -17,7 +17,7 @@ class CreateHewanDto
         $this->jenis = $jenis;
     }
 
-    public function fromRequest(StoreHewanRequest $request): self{
+    public static function fromRequest(StoreHewanRequest $request): self{
         return new self(
             $request->validated('id_customer'),
             $request->validated('nama'),

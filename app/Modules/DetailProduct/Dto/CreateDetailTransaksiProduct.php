@@ -10,6 +10,10 @@ class CreateDetailTransaksiProduct
         public readonly int $jumlah,
         public readonly float $subtotal_per_produk,
     ) {
+        $this->id_transaksi_produk = $id_transaksi_produk;
+        $this->id_produk = $id_produk;
+        $this->jumlah = $jumlah;
+        $this->subtotal_per_produk = $subtotal_per_produk;
     }
 
     public static function fromRequest(StoreDetailTransaksiRequest $request): self

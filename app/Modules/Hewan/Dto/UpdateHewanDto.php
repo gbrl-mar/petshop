@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Hewan\Dto;
-use App\Modules\Hewan\Reqeuests\UpdateHewanRequest;
+use App\Modules\Hewan\Requests\UpdateHewanRequest;
 use Carbon\carbon;
 class UpdateHewanDto
 {
@@ -17,7 +17,7 @@ class UpdateHewanDto
         $this->jenis = $jenis;
     }
 
-    public function fromRequest(UpdateHewanRequest $request): self{
+    public static function fromRequest(UpdateHewanRequest $request): self{
         return new self(
             $request->validated('id_customer'),
             $request->validated('nama'),

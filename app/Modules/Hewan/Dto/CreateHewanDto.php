@@ -1,22 +1,37 @@
 <?php
-namespace Modules\Hewan\Dto;
-
-class CreateHewanDTO
+namespace App\Modules\Hewan\Dto;
+use App\Modules\Hewan\Reqeuests\StoreHewanRequest;
+use Carbon\carbon;
+class CreateHewanDto
 {
-    public function __construct(
-        public string $nama,
-        public string $jenis,
-        public ?int $umur,
-        public int $customer_id
-    ) {}
 
-    public static function fromRequest(array $data): self
-    {
+    private function __construct(
+        public readonly int $id_customer,
+        public readonly string $nama,
+        public readonly carbon $tanggal_lahir,
+        public readonly string $jenis,
+    ) {
+        $this->id_customer = $id_customer;
+        $this->nama= $nama;
+        $this->tanggal_lahir = $tanggal_lahir;
+        $this->jenis = $jenis;
+    }
+
+    public function fromRequest(StoreHewanRequest $request): self{
         return new self(
-            $data['id_customer'],
-            $data['nama'],
-            $data['tanggal_lagir'],
-            $data['jenis_hewan'],
+            $request->validated('id_customer'),
+            $request->validated('nama'),
+            Carbon::parse($request->validated('tanggal_lahir')),
+            $request->validated('jenis'),
         );
+    }
+    public function toArray(): array{
+        return[
+            'id_customer' => $this->id_customer,
+            'nama' => $this->nama,
+            'tanggal_lahir' => $this->tanggal_lahir,
+            'jenis' => $this->jenis,
+        ];
+
     }
 }

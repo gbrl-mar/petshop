@@ -1,8 +1,8 @@
 <?php
-namespace Modules\Hewan\Services;
+namespace App\Modules\Hewan\Services;
 
-use Modules\Hewan\Repositories\HewanRepository;
-use Modules\Hewan\DTO\{CreateHewanDTO, UpdateHewanDTO};
+use App\Modules\Hewan\Repositories\HewanRepository;
+use App\Modules\Hewan\Dto\{CreateHewanDto, UpdateHewanDto};
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class HewanService
@@ -23,14 +23,14 @@ class HewanService
         return $hewan;
     }
 
-    public function create(CreateHewanDTO $dto)
+    public function create(CreateHewanDto $dto)
     {
-        return $this->repo->create((array) $dto);
+        return $this->repo->create($dto->toArray());
     }
 
-    public function update(int $id, UpdateHewanDTO $dto)
+    public function update(int $id, UpdateHewanDto $dto)
     {
-        $updated = $this->repo->update($id, (array) $dto);
+        $updated = $this->repo->update($id, $dto->toArray());
         if (!$updated) {
             throw new ModelNotFoundException("Hewan dengan ID {$id} tidak ditemukan");
         }

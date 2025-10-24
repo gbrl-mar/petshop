@@ -1,21 +1,18 @@
 <?php
-namespace Modules\Hewan\Controllers;
+namespace App\Modules\Hewan\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Modules\Hewan\Services\HewanService;
-use Modules\Hewan\DTO\{CreateHewanDTO, UpdateHewanDTO};
+use App\Modules\Hewan\Services\HewanService;
+use App\Modules\Hewan\Requests\StoreHewanRequest;
+use App\Modules\Hewan\Requests\UpdateHewanRequest;
+use App\Modules\Hewan\Dto\{CreateHewanDto, UpdateHewanDto};
 
 class HewanController extends Controller
 {
     public function __construct(protected HewanService $service) {}
 
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->get('search');
-        if($keyword){
-            return response()->json($this->service->search($keyword));
-        }
         return response()->json($this->service->getAll());
     }
 
@@ -24,15 +21,15 @@ class HewanController extends Controller
         return response()->json($this->service->getById($id));
     }
 
-    public function store(Request $request)
+    public function store(StoreHewanRequest $request)
     {
-        $dto = CreateHewanDTO::fromRequest($request->all());
+        $dto = CreateHewanDto::fromRequest($request);
         return response()->json($this->service->create($dto));
     }
 
-    public function update(Request $request, int $id)
+    public function update(UpdateHewanRequest $request, int $id)
     {
-        $dto = UpdateHewanDTO::fromRequest($request->all());
+        $dto = UpdateHewanDto::fromRequest($request);
         return response()->json($this->service->update($id, $dto));
     }
 

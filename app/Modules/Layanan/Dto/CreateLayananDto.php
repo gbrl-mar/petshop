@@ -1,0 +1,28 @@
+<?php
+namespace App\Modules\Layanan\Dto;
+
+use App\Modules\Layanan\Requests\StoreLayananRequest;
+
+class CreateLayananDto
+{
+    private function __construct(
+        public readonly string $nama,
+        public readonly float $harga,
+    ) {}
+
+    public static function fromRequest(StoreLayananRequest $request): self
+    {
+        return new self(
+            $request->validated('nama'),
+            (float) $request->validated('harga'),
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'nama' => $this->nama,
+            'harga' => $this->harga,
+        ];
+    }
+}

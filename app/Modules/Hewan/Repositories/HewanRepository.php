@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Hewan\Repositories;
+namespace App\Modules\Hewan\Repositories;
 
-use Modules\Hewan\Models\Hewan;
+use App\Modules\Hewan\Entities\Hewan;
 
 class HewanRepository
 {

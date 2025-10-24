@@ -2,11 +2,11 @@
 
 namespace App\Modules\DetailProduct\Entities;
 use App\Modules\Product\Entities\Product;
-
+use App\Modules\TransaksiProduk\Entities\TransaksiProduk;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class detailTransaksiProduct extends Model
+class DetailTransaksiProduct extends Model
 {
     use HasFactory;
 
@@ -24,6 +24,9 @@ class detailTransaksiProduct extends Model
 
     public function product()
     {
-        return $this->belongsToMany(Product::class, 'id_produk', 'id_produk');
+        return $this->belongsTo(Product::class, 'id_produk');
+    }
+    public function transaksiProduk(){
+        return $this->belongsTo(TransaksiProduk::class,'id_transaksi_produk');
     }
 }

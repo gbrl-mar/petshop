@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Modules\Product\Repositories;
-use App\Modules\Product\Models\Product;
+use App\Modules\Product\Entities\Product;
 
 class ProductRepositories
 {
